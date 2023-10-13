@@ -10,6 +10,7 @@ function App() {
     const handleImageChange = (e) => {
         console.log("img onChange triggered");
         const file = e.target.files?.[0];
+        console.log(file)
 
         if (file) {
             const reader = new FileReader();
@@ -39,19 +40,28 @@ function App() {
                 }
             );
             console.log(response);
+            alert("ลบเธอออกไปแล้วแต่น้องยิมยังอยู่กับคุณเสมอ")
         } catch (error) {
             console.log(error);
+            alert("ลบเธอออกไปแล้วแต่น้องยิมยังอยู่กับคุณเสมอ")
         }
     };
 
     return (
         <div className="home">
-            <h1>Linear Project</h1>
-            <h2>Cant delete you so my mind, so I delete you from my photos.</h2>
+            {/* <h1>Linear Project</h1> */}
+            <h2 className="header">"Can't delete you from my mind, so I delete you from my pic."</h2>
             <div className="appFormContainer">
                 <form className="appForm" onSubmit={handleSubmit}>
                     <div className="appFormImgContainer">
-                        <img src={imagePath} alt="preview photo" />
+                        {
+                            image ?  (
+                                <img src={imagePath} alt="preview photo" className="appImage" />
+                            ) : (
+                                <img src="/uploadImage.png" alt="upload-image" />
+                            )
+                        }
+                        {/* <img src={imagePath} alt="preview photo" className="appImage" /> */}
                     </div>
                     <input
                         required
@@ -59,20 +69,26 @@ function App() {
                         accept="image/*"
                         onChange={handleImageChange}
                     />
-                    <label htmlFor="edgeDetectOptions">
-                        Edge Detection Options:
-                    </label>
-                    <select
-                        required
-                        id="edgeDetectOptions"
-                        name="edgeDetect"
-                        onChange={(e) => setMode(e.target.value)}
-                        defaultValue={"canny"}
-                    >
-                        <option value="canny">canny</option>
-                        <option value="laprician">laprician</option>
-                    </select>
-                    <button type="submit">Submit</button>
+                    <div className="selectionZone">
+                        <div className="subHeader">
+                            <label htmlFor="edgeDetectOptions">
+                                Edge Detection Options:
+                            </label>
+                        </div>
+                        <div className="dropdown">
+                            <select
+                                required
+                                id="edgeDetectOptions"
+                                name="edgeDetect"
+                                onChange={(e) => setMode(e.target.value)}
+                                defaultValue={"canny"}
+                            >
+                                <option value="canny">canny</option>
+                                <option value="laprician">laprician</option>
+                            </select>
+                        </div>
+                    <button type="submit" className="submitButton">submit</button>
+                    </div>
                 </form>
             </div>
         </div>
