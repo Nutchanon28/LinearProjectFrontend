@@ -3,17 +3,20 @@ import { useState } from "react";
 import axios from "axios";
 
 function App() {
-    const [avatarPath, setAvatarPath] = useState("");
+    const [mode, setMode] = useState("canny");
+    const [imagePath, setImagePath] = useState("");
+    const [image, setImage] = useState(null);
 
-    const handleAvatarChange = (e) => {
+    const handleImageChange = (e) => {
         console.log("img onChange triggered");
         const file = e.target.files?.[0];
 
         if (file) {
             const reader = new FileReader();
+            setImage(file);
 
             reader.onload = () => {
-                setAvatarPath(reader.result);
+                setImagePath(reader.result);
             };
 
             reader.readAsDataURL(file);
@@ -21,11 +24,20 @@ function App() {
     };
 
     const handleSubmit = async (e) => {
+        console.log(mode);
         e.preventDefault();
+        const formData = new FormData();
+        formData.append("mode", mode);
+        formData.append("image", image);
+
         try {
-            const response = await axios.post("http://127.0.0.1:8000", {
-                test: "test",
-            });
+            const response = await axios.post(
+                "http://127.0.0.1:8000",
+                formData,
+                {
+                    headers: { "Content-Type": "multipart/form-data" },
+                }
+            );
             console.log(response);
         } catch (error) {
             console.log(error);
@@ -39,18 +51,24 @@ function App() {
             <div className="appFormContainer">
                 <form className="appForm" onSubmit={handleSubmit}>
                     <div className="appFormImgContainer">
-                        <img src={avatarPath} alt="preview photo" />
+                        <img src={imagePath} alt="preview photo" />
                     </div>
                     <input
                         required
                         type="file"
                         accept="image/*"
-                        onChange={handleAvatarChange}
+                        onChange={handleImageChange}
                     />
                     <label htmlFor="edgeDetectOptions">
                         Edge Detection Options:
                     </label>
-                    <select id="edgeDetectOptions" name="edgeDetect">
+                    <select
+                        required
+                        id="edgeDetectOptions"
+                        name="edgeDetect"
+                        onChange={(e) => setMode(e.target.value)}
+                        defaultValue={"canny"}
+                    >
                         <option value="canny">canny</option>
                         <option value="laprician">laprician</option>
                     </select>
