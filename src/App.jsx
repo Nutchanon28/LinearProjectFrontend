@@ -49,8 +49,7 @@ function App() {
 
     return (
         <div className="home">
-            {/* <h1>Linear Project</h1> */}
-            <h2 className="header">"Can't delete you from my mind, so I delete you from my pic."</h2>
+            <h2 className="font-Montserrat font-semibold text-center text-neutral-800 text-3xl my-10">"Can't delete you from my mind, so I delete you from my pic."</h2>
             <div className="appFormContainer">
                 <form className="appForm" onSubmit={handleSubmit}>
                     <div className="appFormImgContainer">
@@ -61,16 +60,18 @@ function App() {
                                 <img src="/uploadImage.png" alt="upload-image" />
                             )
                         }
-                        {/* <img src={imagePath} alt="preview photo" className="appImage" /> */}
                     </div>
                     <input
-                        required
-                        type="file"
-                        accept="image/*"
-                        onChange={handleImageChange}
-                    />
+                            type="file"
+                            className="block w-full text-sm text-slate-500
+                                file:mr-4 file:py-2 file:px-4 file:rounded-md
+                                file:border-0 file:text-sm file:font-Montserrat
+                                file:bg-neutral-200 file:text-neutral-500	
+                                hover:file:bg-neutral-50"
+                                onChange={(e) => handleImageChange(e)}
+                        />
                     <div className="selectionZone">
-                        <div className="subHeader">
+                        <div className="font-Montserrat font-medium text-center text-neutral-50 text-3xl my-7">
                             <label htmlFor="edgeDetectOptions">
                                 Edge Detection Options:
                             </label>
@@ -83,11 +84,11 @@ function App() {
                                 onChange={(e) => setMode(e.target.value)}
                                 defaultValue={"canny"}
                             >
-                                <option value="canny">canny</option>
+                                <option value="canny" className="detection-option">canny</option>
                                 <option value="laprician">laprician</option>
                             </select>
                         </div>
-                    <button type="submit" className="submitButton">submit</button>
+                    <button type="submit" className="font-Montserrat cursor-pointer my-5 border-none outline-none bg-[#bb3937] px-5 py-3 text-base text-white border rounded-xl transition-[all ease 0.1s] shadow-[0px 5px 0px 0px #702323;]">Submit</button>
                     </div>
                 </form>
             </div>
