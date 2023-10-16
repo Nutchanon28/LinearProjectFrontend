@@ -28,24 +28,37 @@ function App() {
         console.log(mode);
         e.preventDefault();
         const formData = new FormData();
+        console.log(image)
         formData.append("mode", mode);
         formData.append("image", image);
 
         try {
-            const response = await axios.post(
-                "http://127.0.0.1:8000",
+
+            const response = await axios.post("http://127.0.0.1:8000/",
                 formData,
                 {
                     headers: { "Content-Type": "multipart/form-data" },
                 }
             );
             console.log(response);
-            alert("ลบเธอออกไปแล้วแต่น้องยิมยังอยู่กับคุณเสมอ")
+            window.location.href = 'http://127.0.0.1:8000/pic';
         } catch (error) {
             console.log(error);
-            alert("ลบเธอออกไปแล้วแต่น้องยิมยังอยู่กับคุณเสมอ")
+            // alert("ลบเธอออกไปแล้วแต่น้องยิมยังอยู่กับคุณเสมอ")
+            window.location.href = 'https://i.pinimg.com/originals/59/54/b4/5954b408c66525ad932faa693a647e3f.jpg';
         }
     };
+
+    const handlePig = async () => {
+        try {
+            const response = await axios.get("http://127.0.0.1:8000/pic",
+            );
+            console.log(response);
+        } catch (error) {
+            console.log(error);
+        }
+        return response
+    }
 
     return (
         <div className="home">
@@ -88,7 +101,7 @@ function App() {
                                 <option value="laprician">laprician</option>
                             </select>
                         </div>
-                    <button type="submit" className="font-Montserrat cursor-pointer my-5 border-none outline-none bg-[#bb3937] px-5 py-3 text-base text-white border rounded-xl transition-[all ease 0.1s] shadow-[0px 5px 0px 0px #702323;]">Submit</button>
+                            <button type="submit" className="font-Montserrat cursor-pointer my-5 border-none outline-none bg-[#bb3937] px-5 py-3 text-base text-white border rounded-xl transition-[all ease 0.1s] shadow-[0px 5px 0px 0px #702323;]">Submit</button>
                     </div>
                 </form>
             </div>
