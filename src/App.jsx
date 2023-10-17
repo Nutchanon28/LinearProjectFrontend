@@ -44,8 +44,8 @@ function App() {
             window.location.href = 'http://127.0.0.1:8000/pic';
         } catch (error) {
             console.log(error);
-            // alert("ลบเธอออกไปแล้วแต่น้องยิมยังอยู่กับคุณเสมอ")
-            window.location.href = 'https://i.pinimg.com/originals/59/54/b4/5954b408c66525ad932faa693a647e3f.jpg';
+            alert("ลบเธอออกไปแล้วแต่น้องยิมยังอยู่กับคุณเสมอ")
+            // window.location.href = 'https://i.pinimg.com/originals/59/54/b4/5954b408c66525ad932faa693a647e3f.jpg';
         }
     };
 
