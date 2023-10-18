@@ -144,7 +144,8 @@ function App() {
 
         console.log(file);
         formData.append("mode", mode);
-        formData.append("image", file);
+        formData.append("image", image);
+        formData.append("crop", file);
         formData.append("pos", `${completedCrop.x},${completedCrop.y}`);
 
         try {
