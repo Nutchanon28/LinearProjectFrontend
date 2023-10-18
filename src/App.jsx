@@ -145,9 +145,11 @@ function App() {
         console.log(file);
         formData.append("mode", mode);
         formData.append("image", image);
-        formData.append("crop", file);
+        // formData.append("crop", file);
         formData.append("pos", `${completedCrop.x},${completedCrop.y}`);
+        formData.append("size", `${completedCrop.width},${completedCrop.height}`);
 
+        console.log(completedCrop)
         try {
             const response = await axios.post(
                 "http://127.0.0.1:8000/",
@@ -240,7 +242,10 @@ function App() {
                                 >
                                     canny
                                 </option>
-                                <option value="laprician">laprician</option>
+                                <option value="laplacian">laplacian</option>
+                                <option value="prewitt">prewitt</option>
+                                <option value="robert">robert</option>
+                                <option value="sorbel">sorbel</option>
                             </select>
                         </div>
                         <button
